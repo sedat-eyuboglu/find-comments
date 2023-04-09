@@ -18,6 +18,8 @@ var lineList2 = new List<string> {
     "more_comment*/b"
 };
 
+var newLine = Environment.NewLine;
+
 string ClearComment(string txt)
 {
     var startComment = txt.IndexOf("/*");
@@ -39,7 +41,7 @@ string ClearComment2(string txt)
     var startComment = txt.IndexOf("//");
     if(startComment != -1)
     {
-        var endComment = txt.IndexOf("@", (startComment+2));
+        var endComment = txt.IndexOf(newLine, (startComment+2));
         if(endComment != -1)
         {
             var cnt = endComment - startComment;
@@ -54,12 +56,12 @@ string ClearComment2(string txt)
     return txt;
 }
 
-var text = string.Join("@", lineList);
+var text = string.Join(newLine, lineList);
 var result = ClearComment2(ClearComment(text));
-var newLines = result.Split("@").Where(e => e != string.Empty).ToArray();
-Console.WriteLine(result.Replace("@", " "));
+var newLines = result.Split(newLine).Where(e => e != string.Empty).ToArray();
+Console.WriteLine(result.Replace(newLine, " "));
 
-var text2 = string.Join("@", lineList2);
+var text2 = string.Join(newLine, lineList2);
 var result2 = ClearComment2(ClearComment(text2));
-var newLines2 = result2.Split("@").Where(e => e != string.Empty).ToArray();
+var newLines2 = result2.Split(newLine).Where(e => e != string.Empty).ToArray();
 Console.WriteLine(result2.Trim());
